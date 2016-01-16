@@ -8,9 +8,9 @@ class SiteController
 {	
     public function actionIndex()
     {
-		$description = '1';
-		$keywords = '2';
-		$title = '3';
+		$title = 'hello dii';
+		$keywords = 'hello dii';
+		$description = 'hello dii';
 		$template = Dii::template();
 		include Dii::view('common:header');
 		include Dii::view($template);
