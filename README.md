@@ -17,14 +17,14 @@
 
 http://域名/dii/web/index.php?r=site/index
 
-* 1.//*分解;
+* 1.分解;
   * $controllerid = 'site';
   * $actionid = 'index';
-* 2.//*controller文件;
+* 2.controller文件;
   * dii目录controllers 找到对应的 SiteController.php文件
-* 3.//*action方法;
+* 3.action方法;
   * 根据actionid 执行对应的方法
-* 4.//*view文件;
+* 4.view文件;
   * 根据controllerid与actionid请求对应的view/site/index.htm文件
   
 ##Dii亮点：
