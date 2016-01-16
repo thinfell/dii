@@ -12,7 +12,7 @@
 * 1.将dii文件夹放入Discuz网站的根目录;
 * 2.浏览访问地址"http://域名/dii/web/index.php?r=site/index";
 
-##简单开发逻辑讲解
+##简单开发逻辑讲解：
 * 1.dii唯一入口文件web/index.php;
 * 2.入口参数?r=site/index
 	* site-> controllerid;
