@@ -4,7 +4,7 @@
 
 作者:尹兴飞 
 
-博客:http://thinfell.com/
+演示地址:http://dii.thinfell.com/
 
 结合Discuz程序与amazeui前端框架,模仿Yii框架的基本方法,开发的一个轻量级PHP框架.
 
