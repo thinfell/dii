@@ -7,3 +7,4 @@ require(__DIR__ . '/../../source/class/class_core.php');
 require(__DIR__ . '/../class/dii_base.php');
 $dii = new Dii();
 $dii->run();
+echo '测试一下';
