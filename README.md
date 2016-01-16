@@ -9,13 +9,13 @@
 结合Discuz程序与amazeui前端框架,模仿Yii框架的基本方法,开发的一个轻量级PHP框架.
 
 ##使用方法：
-* 1.将dii目录放入Discuz网站的根目录;
+* 1.将dii文件夹放入Discuz网站的根目录;
 * 2.浏览访问地址"http://域名/dii/web/index.php?r=site/index";
 
 ##简单开发逻辑讲解
 * 1.dii唯一入口文件web/index.php;
 * 2.入口参数?r=site/index
-	* 分解 site-> controllerid;
+	* site-> controllerid;
 	* index-> actionid;
 * 3.从入口参数获取controllerid与actionid,执行对应的PHP文件与方法;
 
