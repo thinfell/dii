@@ -3,15 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{$title}</title>
   <meta name="description" content="{$description}">
   <meta name="keywords" content="{$keywords}">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/css/amazeui.min.css">
-  <link rel="stylesheet" href="assets/css/dii.css">
+  <link rel="stylesheet" href="assets/css/dii.css?{VERHASH}">
 </head>
 <body>
 <header class="am-topbar am-topbar-fixed-top">
@@ -43,11 +41,11 @@
       </ul>
 
       <div class="am-topbar-right">
-        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+        <button onclick="window.location.href='index.php?r=user/register';" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
       </div>
 
       <div class="am-topbar-right">
-        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+        <button onclick="window.location.href='index.php?r=user/login';" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
       </div>
     </div>
   </div>

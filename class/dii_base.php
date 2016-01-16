@@ -180,7 +180,7 @@ class Dii
 		//*增加
 		//*判断是否存在
 		if(!file_exists(DISCUZ_ROOT.$tplfile)) {
-			throw new Exception('错误提示：系统文件 "'.$tplfile.'"不存在 ');
+			throw new Exception('错误提示：系统文件 "./dii/views/'.self::$controllerid.'/'.self::$actionid.'.htm"不存在 ');
 		}
 		if($gettplfile) {
 			return $tplfile;
