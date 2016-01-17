@@ -88,6 +88,9 @@
 	display: none;
     opacity: 0;
 }
+.dii-cursor-pointer {
+	cursor: pointer;
+}
 @media screen and (max-width: 1025px){
 	.dii-sm-btn {
 		display: inline-block;

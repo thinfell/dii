@@ -7,30 +7,30 @@
 <div class="am-g am-container" style="padding:0;">
 	<div class="am-u-lg-5">
 		<form class="am-form" method="post" id="doc-vld-msg">
-			<input type="hidden" name="formhash" value="{FORMHASH}" />
 			<h1>登录</h1>
 			<p>请填写以下信息登录 , 没账号? <a href="index.php?r=user/register">去注册一个账号</a></p>
 			<div class="am-form-group">
 			  <label for="email">邮箱：</label>
-			  <input type="email" id="email" data-validation-message="{$email}" placeholder="输入邮箱" required/>
+			  <input type="email" id="email" data-validation-message="请输入正确的邮箱" placeholder="输入邮箱" required/>
 			</div>
 
 			<div class="am-form-group">
 			  <label for="password">密码：</label>
-			  <input type="password" id="password" minlength="6" data-validation-message="{$password}" placeholder="输入登录密码" required/>
+			  <input type="password" id="password" minlength="6" placeholder="输入登录密码" required/>
 			</div>
 			<div class="am-form-group" id="div_geetest_lib">
 				<div id="div_id_embed"></div>
 			</div>
 			<div class="dii-margin-b-1p5rem">
-				<label for="loginform-rememberme">
+				<label for="loginform-rememberme" class="dii-cursor-pointer">
 				<input type="checkbox" id="loginform-rememberme" name="rememberme" value="1">
 				下次自动登录
 				</label>
 			</div>
 			<div class="am-cf">
-				<input type="submit" name="user_login_submit" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl dii-sm-btn">
+				<input type="submit" name="{$submit}" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl dii-sm-btn">
 			</div>
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
 		</form>
 	</div>
 </div>
