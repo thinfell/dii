@@ -11,6 +11,7 @@ class SiteController
 		$title = 'hello dii';
 		$keywords = 'hello dii';
 		$description = 'hello dii';
+		define('CURSCRIPT', 'site_index');
 		$template = Dii::template();
 		include Dii::view('common:header');
 		include Dii::view($template);

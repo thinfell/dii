@@ -48,11 +48,19 @@ class Dii
 			throw new Exception('错误提示：系统文件 "'.$filename.'"不存在 ');
 		}
 	}
+	
 	public static function template($template)
 	{
 		$actionid = !$template ? self::$actionid : $template;
 		$template = self::$controllerid.':'.$actionid;
 		return $template;
+	}
+	
+	public static function submit($user_submit)
+	{
+		$submit = self::$controllerid.'_'.self::$actionid.'_submit';
+		$submit = !$user_submit ? $submit : $user_submit;
+		return $submit;
 	}
 	
 	//*重写Discuz模板加载引擎函数
