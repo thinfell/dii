@@ -1,10 +1,10 @@
 ##dii是什么?
 
-测试版1.0 (不定期更新中,请勿适用于正式网站,仅供学习交流使用)
+测试版1.0 (不定期更新中,请勿使用于正式网站,仅供学习交流使用)
 
 作者:尹兴飞 
 
-演示地址:http://dii.thinfell.com/
+演示地址:http://dii.thinfell.com/(定期同步最新版)
 
 结合Discuz程序与amazeui前端框架,模仿Yii框架的基本方法,开发的一个轻量级PHP框架.
 
@@ -30,7 +30,9 @@ URL: http://域名/dii/web/index.php?r=site/index
   * dii目录controllers找到对应的SiteController.php文件;
 * 3.action方法;
   * 根据actionid执行对应的public function actionIndex()方法;
-* 4.view文件;
+* 4.models类;
+  * 找到对应的models/SiteIndex.php处理数据;
+* 5.view文件;
   * 根据controllerid与actionid请求对应的view/site/index.htm文件;
   
 ##Dii亮点：

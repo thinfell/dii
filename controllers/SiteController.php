@@ -8,6 +8,7 @@ class SiteController
 {	
     public function actionIndex()
     {
+		global $_G;
 		$modelName = Dii::useModel();
 		define('CURSCRIPT', $modelName);
 		require(__DIR__ . '/../models/'.$modelName.'.php');
