@@ -30,8 +30,6 @@ class UserController
 				dheader('location: ' . dreferer());
 				return true;
 			}
-		}else{
-			$result = $model->login();
 		}
 		include Dii::view('common:header');
 		include Dii::view($template);
@@ -48,14 +46,21 @@ class UserController
 		//极验验证码配置
 		define("GEETEST","../extensions/gt-php-sdk-master/");
 		
-		$title = '注册 - hello dii';
-		$keywords = '注册,hello dii';
-		$description = '注册 hello dii';
+		$modelName = Dii::useModel();
+		define('CURSCRIPT', $modelName);
+		require(__DIR__ . '/../models/'.$modelName.'.php');
+		$model = new $modelName();
+
 		$template = Dii::template();
 		$submit = Dii::submit();
+
 		if(submitcheck($submit,1)) {
-			//进行数据处理
-			return false;
+			$result = $model->register();
+			if($result === true){
+				//登陆成功
+				dheader('location: ' . dreferer());
+				return true;
+			}
 		}
 		include Dii::view('common:header');
 		include Dii::view($template);

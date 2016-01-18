@@ -4,14 +4,14 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-class UserLogin
+class UserRegister
 {
 	public function metaName()
     {
         return [
-            'title' => '登录 - hello dii',
-            'keywords' => '登录,hello dii',
-            'description' => '登录 hello dii',
+            'title' => '注册 - hello dii',
+            'keywords' => '注册,hello dii',
+            'description' => '注册 hello dii',
         ];
     }
 	
@@ -30,7 +30,7 @@ class UserLogin
         return true;
     }
 	
-	public function login()
+	public function register()
 	{
 		global $_G;
 		

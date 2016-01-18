@@ -57,11 +57,11 @@
 	  {else}
 	  
 	  <div class="am-topbar-right">
-        <button onclick="window.location.href='index.php?r=user/login';" class="am-btn am-btn-default am-topbar-btn am-btn-sm"><span class="am-icon-sign-out"></span> 退出</button>
+        <button onclick="window.location.href='index.php?r=user/logout&formhash={FORMHASH}';" class="am-btn am-btn-default am-topbar-btn am-btn-sm"><span class="am-icon-sign-out"></span> 退出</button>
       </div>
 	  
 	  <div class="am-topbar-right">
-        <button onclick="window.location.href='index.php?r=user/logout&formhash={FORMHASH}';" class="am-btn am-btn-link am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> {$_G['username']}</button>
+        <button onclick="window.location.href='index.php?r=site/index';" class="am-btn am-btn-link am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> {$_G['username']}</button>
       </div>
 	  
 	  {/if}

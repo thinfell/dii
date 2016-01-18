@@ -91,9 +91,21 @@
 .dii-cursor-pointer {
 	cursor: pointer;
 }
+.am-form .am-form-group .user-input {
+	width:261px;
+}
+.am-form .am-cf .user-submit {
+	width:261px;
+}
 @media screen and (max-width: 1025px){
 	.dii-sm-btn {
 		display: inline-block;
 		width: 100%;
 	}
+	.am-form .am-form-group .user-input {
+		width: 100%;
+	}
+	.am-form .am-cf .user-submit {
+	width:261px;
+}
 }

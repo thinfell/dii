@@ -4,22 +4,31 @@
 		<li class="am-active">登录</li>
 	</ol>
 </div>
+<style>
+.am-footer {
+	display:none;
+}
+</style>
 <div class="am-g am-container" style="padding:0;">
 	<div class="am-u-lg-5">
 		<form class="am-form" method="post" id="doc-vld-msg">
 			<h1>登录</h1>
-			<p>请填写以下信息登录 , 没账号? <a href="index.php?r=user/register">去注册一个账号</a></p>
-			<div class="am-form-group">
+			<p>没账号? <a href="index.php?r=user/register">去注册一个账号</a></p>
+			<div class="am-form-group {if $result['email']}am-form-error{/if}">
 			  <label for="email">邮箱：</label>
-			  <input type="email" id="email" name="email" data-validation-message="请输入正确的邮箱" placeholder="输入邮箱" required/>
+			  <input type="email" id="email" name="email" class="user-input" data-validation-message="请输入正确的邮箱" placeholder="输入邮箱" value="{$_POST['email']}" required/>
+			  {if $result['email']}<div class="am-alert am-alert-danger">{$result['email']}</div>{/if}
+			  
 			</div>
 
-			<div class="am-form-group">
+			<div class="am-form-group {if $result['password']}am-form-error{/if}">
 			  <label for="password">密码：</label>
-			  <input type="password" id="password" name="password" minlength="6" placeholder="输入登录密码" required/>
+			  <input type="password" id="password" name="password" class="user-input" minlength="6" value="{$_POST['password']}" placeholder="输入登录密码" required/>
+			  {if $result['password']}<div class="am-alert am-alert-danger">{$result['password']}</div>{/if}
 			</div>
-			<div class="am-form-group" id="div_geetest_lib">
+			<div class="am-form-group {if $result['captcha']}am-form-error{/if}" id="div_geetest_lib">
 				<div id="div_id_embed"></div>
+				{if $result['captcha']}<div class="am-alert am-alert-danger">{$result['captcha']}</div>{/if}
 			</div>
 			<div class="dii-margin-b-1p5rem">
 				<label for="loginform-rememberme" class="dii-cursor-pointer">
@@ -28,7 +37,7 @@
 				</label>
 			</div>
 			<div class="am-cf">
-				<input type="submit" name="{$submit}" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl dii-sm-btn">
+				<input type="submit" name="{$submit}" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl dii-sm-btn {$submit} user-submit">
 			</div>
 		<input type="hidden" name="formhash" value="{FORMHASH}" />
 		</form>
@@ -60,7 +69,7 @@ var loadGeetest = function(config) {
     window.gt_captcha_obj = new window.Geetest({
         gt: config.gt,
         challenge: config.challenge,
-        product: 'embed',
+        product: 'float',
         offline: !config.success
     });
 
@@ -106,25 +115,25 @@ $.ajax({
 
 $(function() {
   $('#doc-vld-msg').validator({
-    onValid: function(validity) {
-      $(validity.field).closest('.am-form-group').find('.am-alert').hide();
-    },
+	onValid: function(validity) {
+		$(validity.field).closest('.am-form-group').find('.am-alert').hide();
+	},
 
-    onInValid: function(validity) {
-      var am_field = $(validity.field);
-      var am_group = am_field.closest('.am-form-group');
-      var am_alert = am_group.find('.am-alert');
-      // 使用自定义的提示信息 或 插件内置的提示信息
-      var msg = am_field.data('validationMessage') || this.getValidationMessage(validity);
+	onInValid: function(validity) {
+	  var am_field = $(validity.field);
+	  var am_group = am_field.closest('.am-form-group');
+	  var am_alert = am_group.find('.am-alert');
+	  // 使用自定义的提示信息 或 插件内置的提示信息
+	  var msg = am_field.data('validationMessage') || this.getValidationMessage(validity);
 
-      if (!am_alert.length) {
-        am_alert = $('<div class=\"am-alert am-alert-danger\"></div>').hide().
-          appendTo(am_group);
-      }
+	  if (!am_alert.length) {
+		am_alert = $('<div class=\"am-alert am-alert-danger\"></div>').hide().
+		  appendTo(am_group);
+	  }
 
-      am_alert.html(msg).show();
-    }
-  });
+	  am_alert.html(msg).show();
+	}
+   });
 });
 </script>";
 {/eval}
