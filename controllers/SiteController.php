@@ -8,11 +8,13 @@ class SiteController
 {	
     public function actionIndex()
     {
-		$title = 'hello dii';
-		$keywords = 'hello dii';
-		$description = 'hello dii';
-		define('CURSCRIPT', 'site_index');
+		$modelName = Dii::useModel();
+		define('CURSCRIPT', $modelName);
+		require(__DIR__ . '/../models/'.$modelName.'.php');
+		$model = new $modelName();
+		
 		$template = Dii::template();
+		
 		include Dii::view('common:header');
 		include Dii::view($template);
 		include Dii::view('common:footer');

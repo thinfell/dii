@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{$title}</title>
-  <meta name="description" content="{$description}">
-  <meta name="keywords" content="{$keywords}">
+  <title>{eval echo $model->metaName()['title'];}</title>
+  <meta name="description" content="{eval echo $model->metaName()['description'];}">
+  <meta name="keywords" content="{eval echo $model->metaName()['keywords'];}">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/css/amazeui.min.css">
   <link rel="stylesheet" href="assets/css/dii.css?{VERHASH}">
 </head>
 <body>
-{if CURSCRIPT == 'site_index'}
+{if CURSCRIPT == 'SiteIndex'}
 <header class="am-topbar am-topbar-fixed-top">
 {else}
 <header class="am-topbar am-topbar-inverse">
@@ -29,7 +29,7 @@
 
     <div class="am-collapse am-topbar-collapse" id="collapse-head">
       <ul class="am-nav am-nav-pills am-topbar-nav">
-        <li class="{if CURSCRIPT == 'site_index'}am-active{/if}"><a href="index.php?r=site/index">首页</a></li>
+        <li class="{if CURSCRIPT == 'SiteIndex'}am-active{/if}"><a href="index.php?r=site/index">首页</a></li>
         <li><a href="https://github.com/thinfell/dii" target="_blank">源码项目</a></li>
         <li class="am-dropdown" data-am-dropdown>
           <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">

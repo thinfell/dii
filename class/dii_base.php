@@ -18,10 +18,13 @@ class Dii
 		//*初始化Dii
 		global $_G;
 		list($controllerid, $actionid) = explode('/', $_GET['r']);
-		self::$controllerid = $controllerid;
-		self::$actionid = $actionid;
 		
-		$actionid = $actionid ? $actionid : 'index';
+		$controllerid = ucfirst($controllerid);
+		$actionid = ucfirst($actionid);
+		self::$controllerid = ucfirst($controllerid);
+		self::$actionid = ucfirst($actionid);
+	
+		$actionid = $actionid ? $actionid : 'Index';
 		self::import($controllerid, $actionid);
 		return true;
 	}
@@ -29,7 +32,7 @@ class Dii
 	public static function import($controllerid, $actionid)
 	{
 		$path = '../controllers';
-		$controller = $controllerid.'controller';
+		$controller = $controllerid.'Controller';
 		$action = 'action'.$actionid;
 		$filename = $controller.'.php';
 		if(is_file($path.'/'.$filename)) {
@@ -61,6 +64,13 @@ class Dii
 		$submit = self::$controllerid.'_'.self::$actionid.'_submit';
 		$submit = !$user_submit ? $submit : $user_submit;
 		return $submit;
+	}
+	
+	public static function useModel($user_model)
+	{
+		$model = self::$controllerid.self::$actionid;
+		$model = !$user_model ? $model : $user_model;
+		return $model;
 	}
 	
 	//*重写Discuz模板加载引擎函数

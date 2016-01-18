@@ -11,11 +11,14 @@ class UserController
 		//极验验证码配置
 		define("GEETEST","../extensions/gt-php-sdk-master/");
 		
-		$title = '登录 - hello dii';
-		$keywords = '登录,hello dii';
-		$description = '登录 hello dii';
+		$modelName = Dii::useModel();
+		define('CURSCRIPT', $modelName);
+		require(__DIR__ . '/../models/'.$modelName.'.php');
+		$model = new $modelName();
+
 		$template = Dii::template();
 		$submit = Dii::submit();
+
 		if(submitcheck($submit,1)) {
 			//进行数据处理
 			return false;
