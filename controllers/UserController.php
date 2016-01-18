@@ -57,7 +57,7 @@ class UserController
 		if(submitcheck($submit,1)) {
 			$result = $model->register();
 			if($result === true){
-				//登陆成功
+				//注册成功
 				dheader('location: ' . dreferer());
 				return true;
 			}

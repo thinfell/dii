@@ -27,16 +27,6 @@ class UserLogin
 			$validate_error['email'] = '邮箱格式不正确';
 			return $validate_error;
 		}
-        return true;
-    }
-	
-	public function login()
-	{
-		global $_G;
-		
-		//数据验证
-		if($this->rules() !== true)return $this->rules();
-		$validate_error =array();
 		
 		//极验验证码判断
 		require_once GEETEST. 'lib/class.geetestlib.php';
@@ -59,6 +49,17 @@ class UserLogin
 			}
 		}
 		//**end
+		
+        return true;
+    }
+	
+	public function login()
+	{
+		global $_G;
+		
+		//数据验证
+		if($this->rules() !== true)return $this->rules();
+		$validate_error =array();
 		
 		require_once libfile('function/member');				
 

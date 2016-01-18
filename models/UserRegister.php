@@ -27,16 +27,10 @@ class UserRegister
 			$validate_error['email'] = '邮箱格式不正确';
 			return $validate_error;
 		}
-        return true;
-    }
-	
-	public function register()
-	{
-		global $_G;
-		
-		//数据验证
-		if($this->rules() !== true)return $this->rules();
-		$validate_error =array();
+		if($_POST['password'] != $_POST['password_repeat']){
+			$validate_error['password_repeat'] = '两次输入的密码不一致';
+			return $validate_error;
+		}
 		
 		//极验验证码判断
 		require_once GEETEST. 'lib/class.geetestlib.php';
@@ -59,6 +53,21 @@ class UserRegister
 			}
 		}
 		//**end
+		
+		if(1){
+			$validate_error['password_repeat'] = '完善中';
+			return $validate_error;
+		}
+        return true;
+    }
+	
+	public function register()
+	{
+		global $_G;
+		
+		//数据验证
+		if($this->rules() !== true)return $this->rules();
+		$validate_error =array();
 		
 		require_once libfile('function/member');				
 
