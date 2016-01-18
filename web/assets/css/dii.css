@@ -106,6 +106,6 @@
 		width: 100%;
 	}
 	.am-form .am-cf .user-submit {
-	width:261px;
-}
+		width:100%;
+	}
 }
