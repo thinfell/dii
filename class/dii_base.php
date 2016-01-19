@@ -1,5 +1,12 @@
 <?php
 
+/**
+ *      [Dii] (C)2016-2099 尹兴飞.
+ *      This is NOT a freeware, Code released under the MIT License.
+ *
+ *      @author thinfell <thinfell@qq.com>
+ */
+
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
@@ -49,6 +56,13 @@ class Dii
 			}
 		} else {
 			throw new Exception('错误提示：系统文件 "'.$filename.'"不存在 ');
+		}
+	}
+	
+	public static function getUserEmail($uid)
+	{
+		if($uid){
+			return DB::result_first("SELECT email FROM ".DB::table('common_member')." WHERE uid = '".$uid."' ");
 		}
 	}
 	

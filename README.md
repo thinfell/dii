@@ -10,6 +10,10 @@
 
 结合Discuz程序与amazeui前端框架,模仿Yii框架的基本方法,开发的一个轻量级PHP框架.
 
+##License：
+
+Copyright (c) 2016 thinfell. Code released under the MIT License.
+
 ##使用方法：
 * 1.将dii文件夹放入Discuz网站的根目录;
 * 2.浏览访问地址"http://域名/dii/web/index.php?r=site/index";

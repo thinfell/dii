@@ -61,7 +61,7 @@
       </div>
 	  
 	  <div class="am-topbar-right">
-        <button onclick="window.location.href='index.php?r=site/index';" class="am-btn am-btn-link am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> {$_G['username']}</button>
+        <button onclick="window.location.href='index.php?r=site/index';" class="am-btn am-btn-link am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> {eval echo Dii::getUserEmail($_G['uid']);}</button>
       </div>
 	  
 	  {/if}
