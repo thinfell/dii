@@ -44,5 +44,5 @@ URL: http://域名/dii/web/index.php?r=site/index
 ##Dii亮点：
 * 1.支持Discuz的所有核心函数,用户系统等;
 * 2.打通Ucenter无缝注册与登录;
-* 2.view文件支持Discuz的template的标签所有的用法;
-* 3.包含国内流行的前端框架amazeui;
+* 3.view文件支持Discuz的template的标签所有的用法;
+* 4.包含国内流行的前端框架amazeui;
