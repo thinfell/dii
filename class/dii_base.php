@@ -28,8 +28,8 @@ class Dii
 		
 		$controllerid = ucfirst($controllerid);
 		$actionid = ucfirst($actionid);
-		self::$controllerid = ucfirst($controllerid);
-		self::$actionid = ucfirst($actionid);
+		self::$controllerid = $controllerid;
+		self::$actionid = $actionid;
 	
 		$actionid = $actionid ? $actionid : 'Index';
 		self::import($controllerid, $actionid);
