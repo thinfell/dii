@@ -1,10 +1,12 @@
 ##dii是什么?
 
-测试版1.0 (不定期更新中,请勿使用于正式网站,仅供学习交流使用)
+测试版1.1 (不定期更新中,请勿使用于正式网站,仅供学习交流使用)
 
 作者:尹兴飞 
 
-演示地址:http://dii.thinfell.com/(定期同步最新版)
+演示地址:http://dii.thinfell.com/
+
+(定期同步最新版)
 
 结合Discuz程序与amazeui前端框架,模仿Yii框架的基本方法,开发的一个轻量级PHP框架.
 
@@ -37,5 +39,6 @@ URL: http://域名/dii/web/index.php?r=site/index
   
 ##Dii亮点：
 * 1.支持Discuz的所有核心函数,用户系统等;
+* 2.打通Ucenter无缝注册与登录;
 * 2.view文件支持Discuz的template的标签所有的用法;
 * 3.包含国内流行的前端框架amazeui;

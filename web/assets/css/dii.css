@@ -97,6 +97,9 @@
 .am-form .am-cf .user-submit {
 	width:261px;
 }
+.dii_geetest_embed {
+	margin-top:5px;
+}
 @media screen and (max-width: 1025px){
 	.dii-sm-btn {
 		display: inline-block;

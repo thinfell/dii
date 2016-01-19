@@ -27,15 +27,20 @@
 			  {if $result['password']}<div class="am-alert am-alert-danger">{$result['password']}</div>{/if}
 			</div>
 			
-			<div class="am-form-group {if $result['password']}am-form-error{/if}">
+			<div class="am-form-group {if $result['password_repeat']}am-form-error{/if}">
 			  <label for="password_repeat">确认密码：</label>
 			  <input type="password" id="password_repeat" name="password_repeat" class="user-input" value="{$_POST['password_repeat']}" placeholder="输入确认密码" data-validation-message="两次输入的密码不一致" data-equal-to="#password" required/>
-			  {if $result['password']}<div class="am-alert am-alert-danger">{$result['password']}</div>{/if}
+			  {if $result['password_repeat']}<div class="am-alert am-alert-danger">{$result['password_repeat']}</div>{/if}
 			</div>
 			
-			<div class="am-form-group {if $result['captcha']}am-form-error{/if}" id="div_geetest_lib">
-				<div id="div_id_embed"></div>
+			<div class="am-form-group {if $result['captcha']}am-form-error{/if}" id="dii_geetest_register_lib">
+				<label for="dii_geetest_register">验证码：</label>
+				<div id="dii_geetest_register" class="dii_geetest_embed"></div>
 				{if $result['captcha']}<div class="am-alert am-alert-danger">{$result['captcha']}</div>{/if}
+			</div>
+			<div class="am-form-group {if $result['agreebbrule']}am-form-error{/if}">
+				<label class="dii-cursor-pointer"><input type="checkbox" value="1" name="agreebbrule" minchecked="1" maxchecked="1" required="" class="am-active am-field-valid" data-validation-message="您必须同意服务条款后才能注册"> 同意《<a href="#" target="_blank">服务条款</a>》</label>
+				{if $result['agreebbrule']}<div class="am-alert am-alert-danger">您必须同意服务条款后才能注册</div>{/if}
 			</div>
 			<div class="am-cf">
 				<input type="submit" name="{$submit}" value="注 册" class="am-btn am-btn-primary am-radius am-fl dii-sm-btn {$submit} user-submit">
@@ -74,12 +79,12 @@ var loadGeetest = function(config) {
         offline: !config.success
     });
 
-    gt_captcha_obj.appendTo('#div_id_embed');
+    gt_captcha_obj.appendTo('#dii_geetest_register');
 }
 
 s = document.createElement('script');
 s.src = 'http://api.geetest.com/get.php?callback=gtcallback';
-$('#div_geetest_lib').append(s);
+$('#dii_geetest_register_lib').append(s);
 
 var gtcallback = (function() {
     var status = 0,

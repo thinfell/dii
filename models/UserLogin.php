@@ -27,7 +27,18 @@ class UserLogin
 			$validate_error['email'] = '邮箱格式不正确';
 			return $validate_error;
 		}
-		
+		if(empty($_POST['password'])){
+			$validate_error['password'] = '密码不能为空';
+			return $validate_error;
+		}
+		if(strlen($_POST['password']) < 6){
+			$validate_error['password'] = '至少填写 6 个字符';
+			return $validate_error;
+		}
+		if($_POST['password'] != addslashes($_POST['password'])){
+			$validate_error['password'] = '抱歉，密码包含非法字符';
+			return $validate_error;
+		}
 		//极验验证码判断
 		require_once GEETEST. 'lib/class.geetestlib.php';
 		session_start();
@@ -57,9 +68,10 @@ class UserLogin
 	{
 		global $_G;
 		
-		//数据验证
-		if($this->rules() !== true)return $this->rules();
 		$validate_error =array();
+		//数据验证
+		$validate_error_rules = $this->rules();
+		if($validate_error_rules !== true)return $validate_error_rules;
 		
 		require_once libfile('function/member');				
 
@@ -67,13 +79,36 @@ class UserLogin
 		$input_password = $_POST['password'];
 		$input_rememberme = $_POST['rememberme'];
 		
+		if(!($_G['member_loginperm'] = logincheck($input_email))) {
+			$validate_error['password'] = '密码错误次数过多，请 15 分钟后重新登录';
+			return $validate_error;
+		}
+		
 		$result = userlogin($input_email, $input_password, 0, 0, 'email', $_G['clientip']);
 
 		if($result['status'] <= 0) {
+			
+			$password = preg_replace("/^(.{".round(strlen($input_password) / 4)."})(.+?)(.{".round(strlen($input_password) / 6)."})$/s", "\\1***\\3", $input_password);
+			$errorlog = dhtmlspecialchars(
+				TIMESTAMP."\t".
+				($result['ucresult']['username'] ? $result['ucresult']['username'] : $input_email)."\t".
+				$password."\t".
+				"Ques #".intval($_GET['questionid'])."\t".
+				$_G['clientip']);
+			writelog('illegallog', $errorlog);
 			loginfailed($input_email);
 			failedip();
-			$validate_error['password'] = '邮箱与密码不匹配';
-			return $validate_error;
+			if($_G['member_loginperm'] > 1) {
+				$loginperm = $_G['member_loginperm'] - 1;
+				$validate_error['password'] = '密码错误，您还可以尝试 '.$loginperm.' 次';
+				return $validate_error;
+			} elseif($_G['member_loginperm'] == -1) {
+				$validate_error['password'] = '抱歉，您输入的密码有误';
+				return $validate_error;
+			} else {
+				$validate_error['password'] = '密码错误次数过多，请 15 分钟后重新登录';
+				return $validate_error;
+			}
 		}else{
 			setloginstatus($result['member'], $_GET['rememberme'] ? 2592000 : 0);//是否记住密码,自动登录
 			if($_G['member']['lastip'] && $_G['member']['lastvisit']) {

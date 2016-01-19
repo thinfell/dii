@@ -27,7 +27,23 @@ class UserRegister
 			$validate_error['email'] = '邮箱格式不正确';
 			return $validate_error;
 		}
-		if($_POST['password'] != $_POST['password_repeat']){
+		if(empty($_POST['password'])){
+			$validate_error['password'] = '密码不能为空';
+			return $validate_error;
+		}
+		if(strlen($_POST['password']) < 6){
+			$validate_error['password'] = '至少填写 6 个字符';
+			return $validate_error;
+		}
+		if($_POST['password'] != addslashes($_POST['password'])){
+			$validate_error['password'] = '抱歉，密码包含非法字符';
+			return $validate_error;
+		}
+		if(empty($_POST['password_repeat'])){
+			$validate_error['password_repeat'] = '请确认密码';
+			return $validate_error;
+		}
+		if($_POST['password'] !== $_POST['password_repeat']){
 			$validate_error['password_repeat'] = '两次输入的密码不一致';
 			return $validate_error;
 		}
@@ -36,6 +52,7 @@ class UserRegister
 		require_once GEETEST. 'lib/class.geetestlib.php';
 		session_start();
 		$GtSdk = new GeetestLib();
+
 		if ($_SESSION['gtserver'] == 1) {
 			$result = $GtSdk->validate($_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode']);
 			if ($result == TRUE) {
@@ -52,12 +69,13 @@ class UserRegister
 				return $validate_error;
 			}
 		}
-		//**end
 		
-		if(1){
-			$validate_error['password_repeat'] = '完善中';
+		if(!$_POST['agreebbrule']){
+			$validate_error['agreebbrule'] = '您必须同意服务条款后才能注册';
 			return $validate_error;
 		}
+		//**end
+		
         return true;
     }
 	
@@ -65,31 +83,57 @@ class UserRegister
 	{
 		global $_G;
 		
-		//数据验证
-		if($this->rules() !== true)return $this->rules();
 		$validate_error =array();
+		//数据验证
+		$validate_error_rules = $this->rules();
+		if($validate_error_rules !== true)return $validate_error_rules;
 		
-		require_once libfile('function/member');				
-
 		$input_email = $_POST['email'];
 		$input_password = $_POST['password'];
-		$input_rememberme = $_POST['rememberme'];
+		$rand = rand(100,999);
+		$newusername = 'u_'.$_G['timestamp'].$rand;
+		//*注册数据提交
 		
-		$result = userlogin($input_email, $input_password, 0, 0, 'email', $_G['clientip']);
+		loaducenter();
 
-		if($result['status'] <= 0) {
-			loginfailed($input_email);
-			failedip();
-			$validate_error['password'] = '邮箱与密码不匹配';
-			return $validate_error;
-		}else{
-			setloginstatus($result['member'], $_GET['rememberme'] ? 2592000 : 0);//是否记住密码,自动登录
-			if($_G['member']['lastip'] && $_G['member']['lastvisit']) {
-				dsetcookie('lip', $_G['member']['lastip'].','.$_G['member']['lastvisit']);
+		$uid = uc_user_register(addslashes($newusername), $input_password, $input_email);
+		if($uid <= 0) {
+			if($uid == -4) {
+				$validate_error['email'] = 'Email 地址无效';
+				return $validate_error;
+			} elseif($uid == -5) {
+				$validate_error['email'] = 'Email 包含不可使用的邮箱域名';
+				return $validate_error;
+			} elseif($uid == -6) {
+				$validate_error['email'] = '该 Email 地址已经被注册';
+				return $validate_error;
+			}elseif($uid == -1){
+				$rand = rand(100,999);
+				$newusername = 'u_'.$_G['timestamp'].$rand;
+				$uid = uc_user_register(addslashes($newusername), $input_password, $input_email); 
+				do {
+					$rand = rand(100,999);
+					$newusername = 'u_'.$_G['timestamp'].$rand;
+					$uid = uc_user_register(addslashes($newusername), $input_password, $input_email); 
+				} while ($uid == -1);
+			}else{
+				$validate_error['email'] = '未知错误';
+				return $validate_error;
 			}
-			C::t('common_member_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'port' => $_G['remoteport'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
-			$ucsynlogin = $this->setting['allowsynlogin'] ? uc_user_synlogin($_G['uid']) : '';//是否Ucenter同步登录
-			return true;
 		}
+
+		loadcache('fields_register');
+		$init_arr = explode(',', $_G['setting']['initcredits']);
+		$password = md5(random(10));
+		C::t('common_member')->insert($uid, $newusername, $password, $input_email, 'Manual Acting', 10, $init_arr, 0);
+		
+		//直接登录
+		require_once libfile('function/member');
+		$result = userlogin($input_email, $input_password, 0, 0, 'email', $_G['clientip']);
+		setloginstatus($result['member'], 0);//是否记住密码,自动登录
+		C::t('common_member_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'port' => $_G['remoteport'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
+		$ucsynlogin = $this->setting['allowsynlogin'] ? uc_user_synlogin($_G['uid']) : '';//是否Ucenter同步登录
+		
+		return true;		
 	}
 }
