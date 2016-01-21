@@ -132,7 +132,7 @@ class UserRegister
 		loadcache('fields_register');
 		$init_arr = explode(',', $_G['setting']['initcredits']);
 		$password = md5(random(10));
-		C::t('common_member')->insert($uid, $newusername, $password, $input_email, 'Manual Acting', 10, $init_arr, 0);
+		C::t('common_member')->insert($uid, $newusername, $password, $input_email, $_G['clientip'], 10, $init_arr, 0);
 		
 		//直接登录
 		require_once libfile('function/member');
